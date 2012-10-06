@@ -3,4 +3,19 @@
 </head>
 
 <body>
+  {{> site_list}}
 </body>
+
+<template name="site_list">
+  <ul>
+    {{#each sites}}
+      {{> site}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="site">
+  <li>
+    <a href="{{url}}">{{name}}</a>
+  </li>
+</template>

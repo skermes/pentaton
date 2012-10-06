@@ -3,19 +3,27 @@
 </head>
 
 <body>
-  {{> site_list}}
+  <div class="container">
+    {{> site_list}}
+  </div>
 </body>
 
 <template name="site_list">
-  <ul>
+  {{#each sites_by_3}}
+    {{> site_row}}
+  {{/each}}
+</template>
+
+<template name="site_row">
+  <div class="row">
     {{#each sites}}
-      {{> site}}
+      <div class="span4">
+        {{> site}}
+      </div>
     {{/each}}
-  </ul>
+  </div>
 </template>
 
 <template name="site">
-  <li>
-    <a href="{{url}}">{{name}}</a>
-  </li>
+  <a href="{{url}}">{{name}}</a>
 </template>

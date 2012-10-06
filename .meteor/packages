@@ -5,3 +5,6 @@
 
 autopublish
 preserve-inputs
+bootstrap
+jquery
+stylus

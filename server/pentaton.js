@@ -9,7 +9,8 @@ if (Sites.find().count() === 0) {
     {name: "Pandora", url: "http://pandora.com"},
     {name: "mixest", url: "http://mixest.com"},
     {name: "tunes.io", url: "http://tunes.io"},
-    {name: "Aurgasm", url: "http://aurgasm.us"}
+    {name: "Aurgasm", url: "http://aurgasm.us"},
+    {name: "Earbits", url: "http://www.earbits.com/play"}
   ];
   for (var i = 0; i < default_sites.length; i++) {
     Sites.insert(default_sites[i]);

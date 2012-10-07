@@ -4,6 +4,7 @@ Template.section_selectors.sections = function() {
   return [
     {_id: "music", name: "music", icon: "headphones", description: "Select music sites"},
     {_id: "read", name: "read", icon: "book", description: "Select reading sites"},
+    {_id: "movies", name: "movies", icon: "television", description: "Select movie sites"},
     {_id: "games", name: "games", icon: "controller", description: "Select game sites"}
   ];
 }

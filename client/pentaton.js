@@ -1,5 +1,13 @@
 Sites = new Meteor.Collection("sites");
 
+Template.section_selectors.sections = function() {
+  return [
+    {_id: "music", name: "music", icon: "headphones", description: "Select music sites"},
+    {_id: "read", name: "read", icon: "book", description: "Select reading sites"},
+    {_id: "games", name: "games", icon: "controller", description: "Select game sites"}
+  ];
+}
+
 Template.site_list.sites_by_3 = function() {
   var groups = [];
   var i = 0;

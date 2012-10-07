@@ -2,13 +2,31 @@
   <title>pentaton</title>
   <link href='http://fonts.googleapis.com/css?family=Bevan' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 </head>
 
 <body>
   <div class="container">
+    {{> section_selectors}}
     {{> site_list}}
   </div>
 </body>
+
+<template name="section_selectors">
+  <div class="row">
+    <div class="span12 section-selectors">
+      {{#each sections}}
+        {{> section_selector}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="section_selector">
+  <div class="section-selector" id="selector-{{name}}">
+    <img src="{{icon}}.svg" alt="{{description}}"></img>
+  </div>
+</template>
 
 <template name="site_list">
   {{#each sites_by_3}}

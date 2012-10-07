@@ -1,6 +1,26 @@
 body
   padding 0
 
+.section-selectors
+  text-align center
+
+.section-selector
+  display inline-block
+  margin 0 1em
+  opacity .7
+  cursor pointer
+
+  &:hover
+    opacity 1
+
+  img
+    width: 8em
+    height: 8em
+  // The controller icon is taller than the others
+  &#selector-games img
+    width: 7em
+    height: 7em
+
 .site
   margin-top .5em
   height 10em

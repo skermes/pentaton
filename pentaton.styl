@@ -1,6 +1,9 @@
+body
+  padding 0
+
 .site
+  margin-top .5em
   height 10em
-  margin-top 1em
   position relative
   overflow hidden
 
@@ -12,3 +15,11 @@
     font-weight normal
     font-size 450%
     font-family Vollkorn
+
+@media (min-width: 768px)
+  .site
+    margin-top 20px
+
+@media (min-width: 1200px)
+  .site
+    margin-top 30px

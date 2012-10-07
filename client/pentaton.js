@@ -7,7 +7,16 @@ Template.section_selectors.sections = function() {
     {_id: "movies", name: "movies", icon: "television", description: "Select movie sites"},
     {_id: "games", name: "games", icon: "controller", description: "Select game sites"}
   ];
-}
+};
+
+Template.footer.events({
+  'click .toggle': function(e) {
+    $(".footer .content").slideToggle(500);
+    $("html, body").animate({
+      scrollTop: $(document).height()
+    }, 500);
+  }
+});
 
 Template.site_list.sites_by_3 = function() {
   var groups = [];
@@ -21,8 +30,8 @@ Template.site_list.sites_by_3 = function() {
     i++;
   });
   return groups;
-}
+};
 
 Template.site_row.sites = function() {
   return this;
-}
+};

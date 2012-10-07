@@ -24,6 +24,34 @@ body
   &#selector-movies
     margin 0 1em
 
+.footer
+  text-align right
+
+  .toggle
+    display block
+    margin .5em
+    font-size 200%
+    cursor pointer
+    opacity .7
+    &:hover
+      opacity 1
+
+  .content
+    display none
+    text-align left
+    float right
+    margin-right 1em
+
+    .attribution
+      display block
+
+      &:first-child
+        margin-left 2.3em
+
+      img
+        height 2em
+        width 2em
+
 .site
   margin-top .5em
   height 10em
@@ -43,6 +71,10 @@ body
     font-family Vollkorn
 
 @media (min-width: 768px)
+  .footer
+    position absolute
+    bottom .5em
+
   .site-row
     margin-top 20px
     &:nth-child(2)

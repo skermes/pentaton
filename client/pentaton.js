@@ -1,13 +1,21 @@
+Sections = new Meteor.Collection("sections");
 Sites = new Meteor.Collection("sites");
 
 Template.section_selectors.sections = function() {
-  return [
-    {_id: "music", name: "music", icon: "headphones", description: "Select music sites"},
-    {_id: "read", name: "read", icon: "book", description: "Select reading sites"},
-    {_id: "movies", name: "movies", icon: "television", description: "Select movie sites"},
-    {_id: "games", name: "games", icon: "controller", description: "Select game sites"}
-  ];
+  return Sections.find();
 };
+
+Template.section_selector.active_class = function() {
+  var active = Session.get("active_section");
+  if (active === undefined) { return this.name === "read" ? "active" : ""; }
+  return active === this._id ? "active" : "";
+};
+
+Template.section_selector.events({
+  'click': function(e) {
+    Session.set("active_section", this._id);
+  }
+});
 
 Template.footer.events({
   'click .toggle': function(e) {
@@ -19,9 +27,12 @@ Template.footer.events({
 });
 
 Template.site_list.sites_by_3 = function() {
+  var active = Session.get("active_section");
+  var active_section = "read";
+  if (active !== undefined) { active_section = Sections.findOne({_id: active}).name; }
   var groups = [];
   var i = 0;
-  Sites.find().forEach(function(site) {
+  Sites.find({type: active_section}).forEach(function(site) {
     if (i % 3 === 0) {
       groups.push([]);
     }

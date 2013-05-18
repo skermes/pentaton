@@ -1,6 +1,12 @@
 Sites = new Meteor.Collection("sites");
 Sections = new Meteor.Collection("sections");
 
+Sites.allow({
+  insert: function() { return true; },
+  update: function() { return true; },
+  remove: function() { return true; }
+})
+
 Meteor.startup(function() {
   var default_sites = [
     {type: "music", name: "KEXP", url: "http://kexp.org", color: "FEAC31"},

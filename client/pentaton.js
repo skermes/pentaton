@@ -32,7 +32,7 @@ Template.site_list.sites_by_3 = function() {
   if (active !== undefined) { active_section = Sections.findOne({_id: active}).name; }
   var groups = [];
   var i = 0;
-  Sites.find({type: active_section}).forEach(function(site) {
+  Sites.find({type: active_section}, {sort: ['order', 'asc']}).forEach(function(site) {
     if (i % 3 === 0) {
       groups.push([]);
     }

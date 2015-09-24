@@ -7,13 +7,19 @@
     </style>
   </head>
   <body>
-    <ul>
-    {{range .}}
-      <li style="color: #{{.Color}}">
-        {{.Name}}: {{.Url}} ({{.Category}})
-      </li>
-    {{end}}
-    </ul>
+    <div id="links">
+      {{range .}}
+        <div className="row">
+          {{range .}}
+            <a className="link"
+               href="{{.Url}}"
+               style="background-color: #{{.Color}}">
+              {{.Name}}
+            </a>
+          {{end}}
+        </div>
+      {{end}}
+    </div>
   </body>
 </html>
 {{end}}

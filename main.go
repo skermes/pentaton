@@ -15,6 +15,8 @@ import (
 	_ "github.com/skermes/pentaton/Godeps/_workspace/src/github.com/lib/pq"
 )
 
+const numColumns = 3
+
 var templates *template.Template
 var err error
 var db *sql.DB
@@ -79,7 +81,20 @@ func links(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 
 	sort.Sort(ByPosition(links))
-	render(w, "links", links)
+
+	partitioned := make([][]Link, 0)
+	for i := 0; i < len(links); i++ {
+		row := i / numColumns
+		col := i % numColumns
+
+		if len(partitioned) < row + 1 {
+			partitioned = append(partitioned, make([]Link, numColumns))
+		}
+
+		partitioned[row][col] = links[i];
+	}
+
+	render(w, "links", partitioned)
 }
 
 func main() {

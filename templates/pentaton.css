@@ -1,0 +1,5 @@
+{{define "css"}}
+body {
+  font-family: sans-serif;
+}
+{{end}}

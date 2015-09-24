@@ -50,8 +50,8 @@ type Link struct {
 type ByPosition []Link
 
 // Implement sort.Interface
-func (a ByPosition) Len() int            { return len(a) }
-func (a ByPosition) Swap(i, j int)       { a[i], a[j] = a[j], a[i] }
+func (a ByPosition) Len() int           { return len(a) }
+func (a ByPosition) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByPosition) Less(i, j int) bool { return a[i].Position < a[j].Position }
 
 func links(c web.C, w http.ResponseWriter, r *http.Request) {

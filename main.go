@@ -119,8 +119,7 @@ func getCategories() []string {
 	return categories
 }
 
-func links(c web.C, w http.ResponseWriter, r *http.Request) {
-	category := "reading"
+func linksForCategory(c web.C, w http.ResponseWriter, r *http.Request, category string) {
 	categories := getCategories()
 
 	contains := false
@@ -146,8 +145,17 @@ func links(c web.C, w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func links(c web.C, w http.ResponseWriter, r *http.Request) {
+	linksForCategory(c, w, r, c.URLParams["category"])
+}
+
+func readingLinks(c web.C, w http.ResponseWriter, r *http.Request) {
+	linksForCategory(c, w, r, "reading")
+}
+
 func main() {
 	setup()
-	goji.Get("/", links)
+	goji.Get("/", readingLinks)
+	goji.Get("/:category", links)
 	goji.Serve()
 }

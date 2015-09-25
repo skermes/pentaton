@@ -45,7 +45,6 @@ type Link struct {
 	Name string
 	Color string
 	Position int
-	Category string
 }
 
 type ByPosition []Link
@@ -55,13 +54,14 @@ func (a ByPosition) Len() int           { return len(a) }
 func (a ByPosition) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByPosition) Less(i, j int) bool { return a[i].Position < a[j].Position }
 
-func getPartitionedLinks() [][]Link {
+func getPartitionedLinks(category string) [][]Link {
 	rows, err := db.Query(`
-		select url, links.name, color, position, categories.name from
+		select url, links.name, color, position from
 		links
 		join categories
 		on links.category = categories.id
-	`)
+		where categories.name = $1
+	`, category)
 	if err != nil {
 		fmt.Printf("Error reading from database: %s", err.Error())
 		return nil
@@ -70,14 +70,14 @@ func getPartitionedLinks() [][]Link {
 	links := make([]Link, 0)
 
 	for rows.Next() {
-		var url, name, color, category string
+		var url, name, color string
 		var position int
-		if err := rows.Scan(&url, &name, &color, &position, &category); err != nil {
+		if err := rows.Scan(&url, &name, &color, &position); err != nil {
 			fmt.Printf("Error reading row: %s", err.Error())
 			return nil
 		}
 
-		links = append(links, Link{url, name, color, position, category})
+		links = append(links, Link{url, name, color, position})
 	}
 
 	sort.Sort(ByPosition(links))
@@ -120,9 +120,11 @@ func getCategories() []string {
 }
 
 func links(c web.C, w http.ResponseWriter, r *http.Request) {
+	category := "reading"
+
 	render(w, "links", map[string]interface{}{
-		"Links": getPartitionedLinks(),
-		"Category": "reading",
+		"Links": getPartitionedLinks(category),
+		"Category": category,
 		"Categories": getCategories(),
 	})
 }

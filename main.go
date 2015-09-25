@@ -121,11 +121,28 @@ func getCategories() []string {
 
 func links(c web.C, w http.ResponseWriter, r *http.Request) {
 	category := "reading"
+	categories := getCategories()
+
+	contains := false
+	for _, c := range(categories) {
+		if c == category {
+			contains = true
+		}
+	}
+
+	if !contains {
+		w.WriteHeader(http.StatusNotFound)
+		render(w, "404", map[string]interface{}{
+			"Category": category,
+			"Categories": categories,
+		})
+		return
+	}
 
 	render(w, "links", map[string]interface{}{
 		"Links": getPartitionedLinks(category),
 		"Category": category,
-		"Categories": getCategories(),
+		"Categories": categories,
 	})
 }
 

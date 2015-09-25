@@ -1,0 +1,23 @@
+{{define "404"}}
+<html>
+  <head>
+    <title>pentaton</title>
+    <style type="text/css">
+      {{template "css"}}
+    </style>
+  </head>
+  <body>
+    <div id="categories">
+      {{range .Categories}}
+        <a class="icon {{.}} {{if eq $.Category .}}active{{end}}"
+           href="{{.}}">
+          {{template "icon" .}}
+        </a>
+      {{end}}
+    </div>
+    <div id="four-oh-four">
+      {{.Category}} isn't a category I recognize.  Try one of the ones up at the top.
+    </div>
+  </body>
+</html>
+{{end}}

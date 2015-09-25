@@ -1,0 +1,13 @@
+{{define "icon"}}
+{{if eq . "listening"}}
+  {{template "listening-icon"}}
+{{else if eq . "reading"}}
+  {{template "reading-icon"}}
+{{else if eq . "watching"}}
+  {{template "watching-icon"}}
+{{else if eq . "playing"}}
+  {{template "playing-icon"}}
+{{else}}
+  no icon named {{.}}
+{{end}}
+{{end}}

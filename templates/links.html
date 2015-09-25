@@ -1,20 +1,28 @@
 {{define "links"}}
 <html>
   <head>
-    <title>Pentaton</title>
+    <title>pentaton</title>
     <style type="text/css">
       {{template "css"}}
     </style>
   </head>
   <body>
+    <div id="categories">
+      {{range .Categories}}
+        <a class="icon {{.}} {{if eq $.Category .}}active{{end}}"
+           href="//{{.}}">
+          {{template "icon" .}}
+        </a>
+      {{end}}
+    </div>
     <div id="links">
-      {{range .}}
-        <div className="row">
+      {{range .Links}}
+        <div class="row">
           {{range .}}
-            <a className="link"
+            <a class="link"
                href="{{.Url}}"
                style="background-color: #{{.Color}}">
-              {{.Name}}
+              <span class="name">{{.Name}}</span>
             </a>
           {{end}}
         </div>

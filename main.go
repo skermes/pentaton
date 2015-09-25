@@ -94,7 +94,11 @@ func links(c web.C, w http.ResponseWriter, r *http.Request) {
 		partitioned[row][col] = links[i];
 	}
 
-	render(w, "links", partitioned)
+	render(w, "links", map[string]interface{}{
+		"Links": partitioned,
+		"Category": "reading",
+		"Categories": []string{"listening", "reading", "watching", "playing"},
+	})
 }
 
 func main() {

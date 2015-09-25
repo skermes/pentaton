@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"io"
 	"net/http"
-	"os"
 	"sort"
 
 	"github.com/skermes/pentaton/Godeps/_workspace/src/github.com/zenazn/goji"
@@ -24,12 +23,12 @@ var db *sql.DB
 func setup() {
 	templates, err = template.ParseGlob("templates/*")
 	if err != nil {
-		fmt.Fprintf(os.Stdout, "Error loading templates: %s", err.Error())
+		fmt.Printf("Error loading templates: %s", err.Error())
 	}
 
 	db, err = sql.Open("postgres", "postgres://skermes:skermes@localhost:5432/pentaton?sslmode=disable")
 	if err != nil {
-		fmt.Fprintf(os.Stdout, "Error opening database connection: %s", err.Error())
+		fmt.Printf("Error opening database connection: %s", err.Error())
 	}
 }
 
@@ -37,7 +36,7 @@ func render(w io.Writer, tmpl string, data interface{}) {
 	err = templates.ExecuteTemplate(w, tmpl, data)
 
 	if err != nil {
-		fmt.Fprintf(os.Stdout, "Error executing template '%s': %s", tmpl, err.Error())
+		fmt.Printf("Error executing template '%s': %s", tmpl, err.Error())
 	}
 }
 
@@ -56,7 +55,7 @@ func (a ByPosition) Len() int           { return len(a) }
 func (a ByPosition) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByPosition) Less(i, j int) bool { return a[i].Position < a[j].Position }
 
-func links(c web.C, w http.ResponseWriter, r *http.Request) {
+func getPartitionedLinks() [][]Link {
 	rows, err := db.Query(`
 		select url, links.name, color, position, categories.name from
 		links
@@ -64,8 +63,8 @@ func links(c web.C, w http.ResponseWriter, r *http.Request) {
 		on links.category = categories.id
 	`)
 	if err != nil {
-		fmt.Fprintf(os.Stdout, "Error reading from database: %s", err.Error())
-		return
+		fmt.Printf("Error reading from database: %s", err.Error())
+		return nil
 	}
 
 	links := make([]Link, 0)
@@ -74,7 +73,8 @@ func links(c web.C, w http.ResponseWriter, r *http.Request) {
 		var url, name, color, category string
 		var position int
 		if err := rows.Scan(&url, &name, &color, &position, &category); err != nil {
-			fmt.Fprintf(os.Stdout, "Error reading row: %s", err.Error())
+			fmt.Printf("Error reading row: %s", err.Error())
+			return nil
 		}
 
 		links = append(links, Link{url, name, color, position, category})
@@ -94,10 +94,36 @@ func links(c web.C, w http.ResponseWriter, r *http.Request) {
 		partitioned[row][col] = links[i];
 	}
 
+	return partitioned
+}
+
+func getCategories() []string {
+	rows, err := db.Query(`select name from categories`)
+	if err != nil {
+		fmt.Printf("Error reading from database: %s", err.Error())
+		return nil
+	}
+
+	categories := make([]string, 0)
+
+	for rows.Next() {
+		var category string
+		if err := rows.Scan(&category); err != nil {
+			fmt.Printf("Error reading row: %s", err.Error())
+			return nil
+		}
+
+		categories = append(categories, category)
+	}
+
+	return categories
+}
+
+func links(c web.C, w http.ResponseWriter, r *http.Request) {
 	render(w, "links", map[string]interface{}{
-		"Links": partitioned,
+		"Links": getPartitionedLinks(),
 		"Category": "reading",
-		"Categories": []string{"listening", "reading", "watching", "playing"},
+		"Categories": getCategories(),
 	})
 }
 

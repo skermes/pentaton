@@ -10,7 +10,7 @@
     <div id="categories">
       {{range .Categories}}
         <a class="icon {{.}} {{if eq $.Category .}}active{{end}}"
-           href="//{{.}}">
+           href="{{.}}">
           {{template "icon" .}}
         </a>
       {{end}}

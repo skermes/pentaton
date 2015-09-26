@@ -79,7 +79,7 @@ body {
   margin-left: -5px;
 }
 
-.add-link {
+#add-link {
   display: inline-block;
   width: 31%;
   height: 140px;
@@ -92,11 +92,11 @@ body {
   border: 10px solid #CCC;
 }
 
-.add-link:last-child {
+#add-link:last-child {
   margin-right: 0;
 }
 
-.add-link .activate {
+#add-link .activate {
   font-family: Oswald, sans-serif;
   font-size: 100px;
   text-align: center;
@@ -105,17 +105,21 @@ body {
   cursor: pointer;
 }
 
-.add-link form {
+#add-link form {
   display: none;
 }
 
-.add-link:hover,
-.add-link.active {
+#add-link:hover,
+#add-link.active {
   opacity: 1;
 }
 
-.add-link.active form {
+#add-link.active form {
   display: block;
+}
+
+#add-link.active .activate {
+  display: none;
 }
 
 #four-oh-four {

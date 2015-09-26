@@ -1,6 +1,6 @@
 {{define "link-widget"}}
 {{if eq .Widget "new-link-form"}}
-  <div class="add-link">
+  <div id="add-link">
     <div class="activate">+</div>
     <form action="{{.Category}}" method="POST">
       Add a link to {{.Category}}

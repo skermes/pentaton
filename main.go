@@ -21,7 +21,11 @@ var err error
 var db *sql.DB
 
 func setup() {
-	templates, err = template.ParseGlob("templates/*")
+	funcs := template.FuncMap{
+		"mod": func(x, y int) int { return x % y },
+	}
+
+	templates, err = template.New("").Funcs(funcs).ParseGlob("templates/*")
 	if err != nil {
 		fmt.Printf("Error loading templates: %s", err.Error())
 	}
@@ -40,21 +44,27 @@ func render(w io.Writer, tmpl string, data interface{}) {
 	}
 }
 
-type Link struct {
+// This is kind of a gross hack, but it lets me add things to the list of
+// links that aren't links, like a marker for where the new link form should
+// go.
+type LinkWidget struct {
 	Url string
 	Name string
 	Color string
 	Position int
+
+	Widget string
+	Category string
 }
 
-type ByPosition []Link
+type ByPosition []LinkWidget
 
 // Implement sort.Interface
 func (a ByPosition) Len() int           { return len(a) }
 func (a ByPosition) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
 func (a ByPosition) Less(i, j int) bool { return a[i].Position < a[j].Position }
 
-func getPartitionedLinks(category string) [][]Link {
+func getPartitionedLinks(category string) [][]LinkWidget {
 	rows, err := db.Query(`
 		select url, links.name, color, position from
 		links
@@ -67,7 +77,7 @@ func getPartitionedLinks(category string) [][]Link {
 		return nil
 	}
 
-	links := make([]Link, 0)
+	links := make([]LinkWidget, 0)
 
 	for rows.Next() {
 		var url, name, color string
@@ -77,18 +87,19 @@ func getPartitionedLinks(category string) [][]Link {
 			return nil
 		}
 
-		links = append(links, Link{url, name, color, position})
+		links = append(links, LinkWidget{Url: url, Name: name, Color: color, Position: position})
 	}
 
 	sort.Sort(ByPosition(links))
+	links = append(links, LinkWidget{Widget: "new-link-form", Category: category})
 
-	partitioned := make([][]Link, 0)
+	partitioned := make([][]LinkWidget, 0)
 	for i := 0; i < len(links); i++ {
 		row := i / numColumns
 		col := i % numColumns
 
 		if len(partitioned) < row + 1 {
-			partitioned = append(partitioned, make([]Link, numColumns))
+			partitioned = append(partitioned, make([]LinkWidget, numColumns))
 		}
 
 		partitioned[row][col] = links[i];

@@ -19,11 +19,7 @@
       {{range .Links}}
         <div class="row">
           {{range .}}
-            <a class="link"
-               href="{{.Url}}"
-               style="background-color: #{{.Color}}">
-              <span class="name">{{.Name}}</span>
-            </a>
+            {{template "link-widget" .}}
           {{end}}
         </div>
       {{end}}

@@ -79,6 +79,45 @@ body {
   margin-left: -5px;
 }
 
+.add-link {
+  display: inline-block;
+  width: 31%;
+  height: 140px;
+  margin: 0 2.7% 0 0;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  opacity: 0.3;
+
+  border: 10px solid #CCC;
+}
+
+.add-link:last-child {
+  margin-right: 0;
+}
+
+.add-link .activate {
+  font-family: Oswald, sans-serif;
+  font-size: 100px;
+  text-align: center;
+  color: #CCC;
+  margin-top: -23px;
+  cursor: pointer;
+}
+
+.add-link form {
+  display: none;
+}
+
+.add-link:hover,
+.add-link.active {
+  opacity: 1;
+}
+
+.add-link.active form {
+  display: block;
+}
+
 #four-oh-four {
   font-family: Oswald, sans-serif;
   font-size: 45px;

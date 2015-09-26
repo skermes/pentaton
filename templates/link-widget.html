@@ -1,0 +1,16 @@
+{{define "link-widget"}}
+{{if eq .Widget "new-link-form"}}
+  <div class="add-link">
+    <div class="activate">+</div>
+    <form action="{{.Category}}" method="POST">
+      Add a link to {{.Category}}
+    </form>
+  </div>
+{{else}}
+  <a class="link"
+     href="{{.Url}}"
+     style="background-color: #{{.Color}}">
+    <span class="name">{{.Name}}</span>
+  </a>
+{{end}}
+{{end}}

@@ -164,9 +164,16 @@ func readingLinks(c web.C, w http.ResponseWriter, r *http.Request) {
 	linksForCategory(c, w, r, "reading")
 }
 
+func newLink(c web.C, w http.ResponseWriter, r *http.Request) {
+	category := c.URLParams["category"]
+
+	linksForCategory(c, w, r, category)
+}
+
 func main() {
 	setup()
 	goji.Get("/", readingLinks)
 	goji.Get("/:category", links)
+	goji.Post("/:category", newLink)
 	goji.Serve()
 }

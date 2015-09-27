@@ -3,7 +3,11 @@
   <div id="add-link">
     <div class="activate">+</div>
     <form action="{{.Category}}" method="POST">
-      Add a link to {{.Category}}
+      <label for="add-link-color">#</label>
+      <input type="text" class="color" name="color" id="add-link-color" value="000000" tabindex=1/>
+      <input type="submit" value="&#x2713;" />
+      <input type="text" class="url" name="url" id="add-link-url" value="http://" tabindex=2 />
+      <input type="text" class="name" name="name" id="add-link-name" tabindex=3 />
     </form>
   </div>
 {{else}}

@@ -90,10 +90,21 @@ body {
   opacity: 0.3;
 
   border: 10px solid #CCC;
+  font-family: Oswald, sans-serif;
+  color: white;
 }
 
 #add-link:last-child {
   margin-right: 0;
+}
+
+#add-link:hover,
+#add-link.active {
+  opacity: 1;
+}
+
+#add-link.active {
+  border-width: 0;
 }
 
 #add-link .activate {
@@ -109,17 +120,55 @@ body {
   display: none;
 }
 
-#add-link:hover,
-#add-link.active {
-  opacity: 1;
-}
-
 #add-link.active form {
   display: block;
 }
 
 #add-link.active .activate {
   display: none;
+}
+
+#add-link input {
+  font-family: inherit;
+  color: inherit;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: none;
+  padding: 8px 8px 8px 8px;
+}
+
+#add-link label[for="add-link-color"] {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px 1px 7px 8px;
+  margin-right: -3px;
+}
+
+#add-link #add-link-color {
+  width: 4rem;
+  padding-left: 1px;
+}
+
+#add-link #add-link-url,
+#add-link #add-link-name {
+  display: block;
+  margin-top: 16px;
+  width: 100%;
+}
+
+#add-link #add-link-name {
+  padding: 0;
+  font-size: 24px;
+  margin-left: -1px;
+}
+
+#add-link input[type="submit"] {
+  float: right;
+  cursor: pointer;
+}
+
+#add-link input[type="submit"]:hover {
+  color: #abc123;
+  font-weight: bold;
 }
 
 #four-oh-four {

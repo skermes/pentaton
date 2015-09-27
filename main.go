@@ -166,6 +166,40 @@ func readingLinks(c web.C, w http.ResponseWriter, r *http.Request) {
 
 func newLink(c web.C, w http.ResponseWriter, r *http.Request) {
 	category := c.URLParams["category"]
+	categories := getCategories()
+
+	contains := false
+	for _, c := range(categories) {
+		if c == category {
+			contains = true
+		}
+	}
+
+	if !contains {
+		w.WriteHeader(http.StatusNotFound)
+		render(w, "404", map[string]interface{}{
+			"Category": category,
+			"Categories": categories,
+		})
+		return
+	}
+
+	color := r.PostFormValue("color")
+	url := r.PostFormValue("url")
+	name := r.PostFormValue("name")
+
+	_, err := db.Exec(`
+		insert into links
+		(color, url, name, position, category)
+		values
+		($1, $2, $3,
+		 (select max(position) from links) + 1,
+		 (select id from categories where name = $4))
+	`, color, url, name, category)
+
+	if err != nil {
+		fmt.Println("Error saving new link: %s", err.Error())
+	}
 
 	linksForCategory(c, w, r, category)
 }

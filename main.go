@@ -96,13 +96,12 @@ func getPartitionedLinks(category string) [][]LinkWidget {
 	partitioned := make([][]LinkWidget, 0)
 	for i := 0; i < len(links); i++ {
 		row := i / numColumns
-		col := i % numColumns
 
 		if len(partitioned) < row + 1 {
-			partitioned = append(partitioned, make([]LinkWidget, numColumns))
+			partitioned = append(partitioned, make([]LinkWidget, 0))
 		}
 
-		partitioned[row][col] = links[i];
+		partitioned[row] = append(partitioned[row], links[i])
 	}
 
 	return partitioned

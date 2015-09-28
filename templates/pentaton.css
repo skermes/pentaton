@@ -7,7 +7,8 @@ body {
 }
 
 #categories {
-  width: 500px;
+  width: 52%;
+  max-width: 600px;
   margin: 30px auto;
 }
 
@@ -35,7 +36,8 @@ body {
 }
 
 #links {
-  width: 734px;
+  width: 77%;
+  max-width: 1200px;
   margin: auto;
 }
 

@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"io"
 	"net/http"
+	"os"
 	"sort"
 
 	"github.com/skermes/pentaton/Godeps/_workspace/src/github.com/zenazn/goji"
@@ -30,7 +31,7 @@ func setup() {
 		fmt.Printf("Error loading templates: %s", err.Error())
 	}
 
-	db, err = sql.Open("postgres", "postgres://skermes:skermes@localhost:5432/pentaton?sslmode=disable")
+	db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		fmt.Printf("Error opening database connection: %s", err.Error())
 	}

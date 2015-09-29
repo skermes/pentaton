@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"html/template"
-	// "image/color"
 	"io"
 	"net/http"
 	"os"

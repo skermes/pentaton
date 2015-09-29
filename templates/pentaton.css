@@ -19,6 +19,7 @@ body {
   vertical-align: top;
 
   opacity: 0.5;
+  transition: opacity 0.5s;
 }
 
 #categories .icon:last-child {
@@ -28,6 +29,7 @@ body {
 #categories .icon:hover,
 #categories .icon.active {
   opacity: 1;
+  transition: opacity 0.5s;
 }
 
 #categories .icon.playing {
@@ -57,6 +59,7 @@ body {
   overflow: hidden;
 
   opacity: 0.7;
+  transition: opacity 0.5s;
 
   white-space: nowrap;
   text-decoration: none;
@@ -64,6 +67,7 @@ body {
 
 .link:hover {
   opacity: 1;
+  transition: opacity 0.5s;
 }
 
 .link:last-child {

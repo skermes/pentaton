@@ -13,14 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
   </head>
   <body>
-    <div id="categories">
-      {{range .Categories}}
-        <a class="icon {{.}} {{if eq $.Category .}}active{{end}}"
-           href="{{.}}">
-          {{template "icon" .}}
-        </a>
-      {{end}}
-    </div>
+    {{template "categories" .}}
     <div id="links">
       {{range .Links}}
         <div class="row">

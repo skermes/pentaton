@@ -1,0 +1,10 @@
+{{define "categories"}}
+<div id="categories">
+  {{range .Categories}}
+    <a class="icon {{.}} {{if eq $.Category .}}active{{end}}"
+       href="{{.}}">
+      {{template "icon" .}}
+    </a>
+  {{end}}
+</div>
+{{end}}

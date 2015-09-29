@@ -187,8 +187,8 @@ body {
   font-family: Oswald, sans-serif;
   font-size: 45px;
 
-  width: 500px;
-  margin: auto;
+  width: 77%;
+  margin: 50px auto;
   text-align: center;
 
   opacity: 0.7;
@@ -217,6 +217,10 @@ body {
   #add-link {
     display: block;
     width: 100%;
+  }
+
+  #four-oh-four {
+    font-size: 30px;
   }
 }
 {{end}}

@@ -58,8 +58,9 @@ body {
   margin: 0 2.7% 0 0;
   overflow: hidden;
 
-  opacity: 0.7;
-  transition: opacity 0.5s;
+  background-position: 100% 0;
+  background-size: 300% 100%;
+  transition: background-position 0s;
 
   white-space: nowrap;
   text-decoration: none;
@@ -68,6 +69,9 @@ body {
 .link:hover {
   opacity: 1;
   transition: opacity 0.5s;
+
+  background-position: 10% 0;
+  transition: background-position 0.5s;
 }
 
 .link:last-child {
@@ -94,6 +98,7 @@ body {
   box-sizing: border-box;
 
   opacity: 0.3;
+  transition: opacity 0.5s;
 
   border: 10px solid #CCC;
   font-family: Oswald, sans-serif;
@@ -107,6 +112,7 @@ body {
 #add-link:hover,
 #add-link.active {
   opacity: 1;
+  transition: opacity 0.5s;
 }
 
 #add-link.active {

@@ -4,10 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"html/template"
+	// "image/color"
 	"io"
 	"net/http"
 	"os"
 	"sort"
+	"strconv"
 
 	"github.com/skermes/pentaton/Godeps/_workspace/src/github.com/zenazn/goji"
 	"github.com/skermes/pentaton/Godeps/_workspace/src/github.com/zenazn/goji/web"
@@ -24,6 +26,19 @@ var db *sql.DB
 func setup() {
 	funcs := template.FuncMap{
 		"mod": func(x, y int) int { return x % y },
+		"rgbstr": func(hex string) string {
+			rgb, err := strconv.ParseInt(hex, 16, 32)
+			if err != nil {
+				fmt.Printf("Error parsing color string '%s': %s", hex, err.Error())
+				return ""
+			}
+
+			r := (rgb & 0xFF0000) >> 16
+			g := (rgb & 0xFF00) >> 8
+			b := rgb & 0xFF
+
+			return fmt.Sprintf("%d, %d, %d", r, g, b)
+		},
 	}
 
 	templates, err = template.New("").Funcs(funcs).ParseGlob("templates/*")

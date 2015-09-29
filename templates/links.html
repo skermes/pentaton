@@ -1,28 +1,14 @@
 {{define "links"}}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>pentaton</title>
-    <style type="text/css">
-      {{template "css"}}
-    </style>
-    <script type="text/javascript">
-      {{template "js"}}
-    </script>
-    <meta charset=utf-8 />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
-  </head>
-  <body>
-    {{template "categories" .}}
-    <div id="links">
-      {{range .Links}}
-        <div class="row">
-          {{range .}}
-            {{template "link-widget" .}}
-          {{end}}
-        </div>
-      {{end}}
-    </div>
-  </body>
-</html>
+{{template "layout-head"}}
+  {{template "categories" .}}
+  <div id="links">
+    {{range .Links}}
+      <div class="row">
+        {{range .}}
+          {{template "link-widget" .}}
+        {{end}}
+      </div>
+    {{end}}
+  </div>
+{{template "layout-foot"}}
 {{end}}

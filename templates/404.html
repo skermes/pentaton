@@ -1,19 +1,8 @@
 {{define "404"}}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>pentaton</title>
-    <style type="text/css">
-      {{template "css"}}
-    </style>
-    <meta charset=utf-8 />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
-  </head>
-  <body>
-    {{template "categories" .}}
-    <div id="four-oh-four">
-      {{.Category}} isn't a category I recognize.  Try one of the ones up at the top.
-    </div>
-  </body>
-</html>
+{{template "layout-head"}}
+  {{template "categories" .}}
+  <div id="four-oh-four">
+    {{.Category}} isn't a category I recognize.  Try one of the ones up at the top.
+  </div>
+{{template "layout-foot"}}
 {{end}}

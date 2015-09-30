@@ -1,6 +1,11 @@
 {{define "css"}}
 @import url(https://fonts.googleapis.com/css?family=Oswald:700);
 
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: sans-serif;
   margin: 0;
@@ -9,7 +14,8 @@ body {
 #categories {
   width: 52%;
   max-width: 600px;
-  margin: 30px auto;
+  margin: auto;
+  padding: 30px 0;
 }
 
 #categories .icon {
@@ -18,8 +24,8 @@ body {
   margin-right: 4%;
   vertical-align: top;
 
-  opacity: 0.5;
-  transition: opacity 0.5s;
+  fill: #AAA;
+  transition: fill 0.5s;
 }
 
 #categories .icon:last-child {
@@ -28,8 +34,8 @@ body {
 
 #categories .icon:hover,
 #categories .icon.active {
-  opacity: 1;
-  transition: opacity 0.5s;
+  fill: #000;
+  transition: fill 0.5s;
 }
 
 #categories .icon.playing {
@@ -97,10 +103,9 @@ body {
   overflow: hidden;
   box-sizing: border-box;
 
-  opacity: 0.3;
-  transition: opacity 0.5s;
+  border: 10px solid #EEE;
+  transition: border-color 0.5s;
 
-  border: 10px solid #CCC;
   font-family: Oswald, sans-serif;
   color: white;
 }
@@ -111,8 +116,8 @@ body {
 
 #add-link:hover,
 #add-link.active {
-  opacity: 1;
-  transition: opacity 0.5s;
+  border-color: #CCC;
+  transition: border-color 0.5s;
 }
 
 #add-link.active {
@@ -123,9 +128,16 @@ body {
   font-family: Oswald, sans-serif;
   font-size: 100px;
   text-align: center;
-  color: #CCC;
   margin-top: -23px;
   cursor: pointer;
+
+  color: #EEE;
+  transition: color 0.5s;
+}
+
+#add-link:hover .activate {
+  color: #CCC;
+  transition: color 0.5s;
 }
 
 #add-link form {
@@ -192,6 +204,82 @@ body {
   text-align: center;
 
   opacity: 0.7;
+}
+
+#menu-trigger {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+
+  width: 50px;
+  transform: rotate(40deg);
+
+  cursor: pointer;
+  fill: #CCC;
+  transition: fill 0.2s;
+}
+
+#menu-trigger:hover {
+  fill: #000;
+  transition: fill 0.2s;
+}
+
+#menu #menu-content {
+  position: absolute;
+  right: -310px;
+  top: 0;
+  bottom: 0;
+  transition: right 0.2s ease-in-out;
+
+  padding: 15px;
+  width: 250px;
+
+  background-color: #FFF;
+  box-shadow: 0 0 30px #333;
+  color: #333;
+}
+
+#menu.active #menu-content {
+  right: 0;
+  transition: right 0.5s ease-in-out;
+}
+
+#menu .head {
+  font-family: Oswald, sans-serif;
+  font-size: 35px;
+  text-align: center;
+  border-bottom: 1px solid #CCC;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#menu .section {
+  margin-top: 60px;
+}
+
+#menu .foot {
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #CCC;
+  padding-top: 15px;
+}
+
+#menu .foot ul {
+  padding: 0;
+}
+
+#menu .foot li {
+  list-style-type: none;
+  line-height: 30px;
+}
+
+#menu .foot svg {
+  width: 20px;
+  vertical-align: middle;
+}
+
+#menu a {
+  color: #333;
 }
 
 @media (max-width: 720px) {

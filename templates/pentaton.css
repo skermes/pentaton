@@ -310,5 +310,9 @@ body {
   #four-oh-four {
     font-size: 30px;
   }
+
+  #menu-trigger {
+    display: none;
+  }
 }
 {{end}}

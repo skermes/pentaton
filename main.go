@@ -223,5 +223,12 @@ func main() {
 	goji.Get("/", readingLinks)
 	goji.Get("/:category", links)
 	goji.Post("/:category", newLink)
+
+	static := web.New()
+	static.Get("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	http.Handle("/static/", static)
+
+	// goji.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
 	goji.Serve()
 }

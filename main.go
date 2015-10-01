@@ -224,11 +224,13 @@ func main() {
 	goji.Get("/:category", links)
 	goji.Post("/:category", newLink)
 
+	// I'm not sure why I have to jump through this extra set of hoops rather than
+	// being able to goji.Get(...) something, but this is what works.  Shamelessly
+	// appropriated from
+	// https://github.com/haruyama/golang-goji-sample/blob/f17adbba8a73075b7303837bcf257366db750972/server.go#L30-L32
 	static := web.New()
 	static.Get("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	http.Handle("/static/", static)
-
-	// goji.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	goji.Serve()
 }
